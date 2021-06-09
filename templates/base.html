@@ -1,0 +1,206 @@
+<html>
+  <head>
+    <title>Video Live Stream</title>
+
+    <script type=text/javascript src="{{
+      url_for('static', filename='jquery-3.5.1.js') }}"></script>  
+
+    <style>
+    .button {
+  background-color: 	#FF0000;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 50%;
+}
+
+    .two-buttons{
+
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 100px;
+        padding-bottom:px;
+        float: right;
+
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1>Video Live Stream ROVERBASE</h1>
+
+      <img src="{{ url_for('video_feed')}}"> 
+    
+    <br>
+    <br>
+
+
+    <br>
+
+    <form method="POST" id="up">
+      <button class="button button5" type="submit">Up</button>
+    </form>
+
+    <div class="two-buttons">
+      <div>
+
+        <form method="POST" id="left">
+          <button class="button button5" type="submit">Left</button>
+        </form>
+
+      </div>
+      
+      <div>
+
+        <form method="POST" id="right">
+          <button class="button button5" type="submit">Right</button>
+        </form>
+
+      </div>
+
+      <br>
+      <br>
+
+    </div>
+
+    <form method="POST" id="down">
+      <button class="button button5" type="submit">Down</button>
+    </form>
+    
+    <form method="POST" id="get_coords">
+      <button class="button button5" type="submit">Get Coordinates</button>
+    </form>
+    
+    <script type=text/javascript src="{{
+      url_for('static', filename='jquery-3.5.1.js') }}"></script>  
+
+    <script>
+      const left = document.getElementById('left');
+      const right = document.getElementById('right');
+      const up = document.getElementById('up');
+      const down = document.getElementById('down');
+      const get_coords = document.getElementById('get_coords');
+
+      const hotKey = (e) => {
+        let windowEvent = window.event ? event : e;
+
+        if (windowEvent.keyCode === 87 || windowEvent.keyCode === 38){
+          upHandler(e);
+        }
+
+        else if (windowEvent.keyCode === 83 || windowEvent.keyCode === 40){
+          downHandler(e);
+        }
+
+        else if (windowEvent.keyCode === 65 || windowEvent.keyCode === 37){
+          leftHandler(e);
+        }
+
+        else if (windowEvent.keyCode === 39 || windowEvent.keyCode === 68){
+          rightHandler(e);
+        }
+        
+        else if (windowEvent.keyCode === 13){
+          coordsHandler(e);
+        }
+        
+      }
+
+      
+      
+      left.addEventListener('submit', leftHandler);
+      right.addEventListener('submit', rightHandler);
+      up.addEventListener('submit', upHandler);
+      down.addEventListener('submit', downHandler);
+      get_coords.addEventListener('submit', coordsHandler);
+      document.onkeydown = hotKey;
+
+
+      function leftHandler(thingy) {
+
+        thingy.preventDefault();
+        console.log("button pressed")
+        $.ajax({
+        type: "POST",
+        url: "{{ url_for('cam')}}",
+        data: {
+          key:'left',
+          }
+  
+        })
+
+      }
+      
+      function rightHandler(thingy) {
+
+          thingy.preventDefault();
+          console.log("button pressed")
+          $.ajax({
+          type: "POST",
+          url: "{{ url_for('cam')}}",
+          data: {
+            key:'right',
+            }
+
+        })
+
+      }
+
+      function upHandler(thingy) {
+
+          thingy.preventDefault();
+          console.log('button pressed')
+          $.ajax({
+          type: "POST",
+          url: "{{ url_for('cam')}}",
+          data: {
+            key:'up',
+            }
+
+        })
+
+      }
+
+      function downHandler(thingy) {
+
+          thingy.preventDefault();
+          console.log('button pressed')
+          $.ajax({
+          type: "POST",
+          url: "{{ url_for('cam')}}",
+          data: {
+            key:'down',
+            }
+
+        })
+
+      }
+
+      function coordsHandler(thingy) {
+
+          thingy.preventDefault();
+          console.log('button pressed')
+          $.ajax({
+          type: "POST",
+          url: "{{ url_for('cam')}}",
+          data: {
+            key:'enter',
+            }
+
+        })
+
+      }
+
+
+    </script>
+  
+  </body>
+
+</html>
+
+
