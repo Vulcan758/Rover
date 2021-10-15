@@ -53,3 +53,6 @@ Here I primarily used Javascript send key press events for the cursor or for con
 All of this sounds like a lot but the latency isnt as much as you would expect and is much better than compared to running this whole system on a GUI application on the Raspberry Pi as opposed to a web interface as shown here.
 
 Hope everyone who comes across this likes it, its a massive passion project and something I'm really really proud of. Thank you <3.
+
+
+- Al Mahir Ahmed (Vulcan)
